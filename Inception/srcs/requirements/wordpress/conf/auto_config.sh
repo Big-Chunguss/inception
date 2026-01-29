@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Read passwords from secrets
+source /run/secrets/credentials
+WP_ADMIN_PASSWORD=$(grep "WP_ADMIN_PASSWORD" /run/secrets/credentials | cut -d'=' -f2)
+WP_USER_PASSWORD=$(grep "WP_USER_PASSWORD" /run/secrets/credentials | cut -d'=' -f2)
+SQL_PASSWORD=$(cat /run/secrets/db_password)
+
 # Wait for MariaDB to be ready
 until mysqladmin ping -h"mariadb" --silent; do
     echo "Waiting for MariaDB..."

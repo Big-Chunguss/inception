@@ -24,12 +24,16 @@ services:
     environment:
       - SQL_DATABASE=${SQL_DATABASE}
       - SQL_USER=${SQL_USER}
-      - SQL_PASSWORD=${SQL_PASSWORD}
-      - SQL_ROOT_PASSWORD=${SQL_ROOT_PASSWORD}
+    secrets:
+      - db_password
+      - db_root_password
     volumes:
       - mariadb:/var/lib/mysql
     networks:
       - inception
+    secrets:
+      - db_password
+      - db_root_password
   wordpress:
     container_name: wordpress
     env_file: .env
@@ -44,6 +48,9 @@ services:
     restart: on-failure
     expose:
     - "9000"
+    secrets:
+      - db_password
+      - credentials
 
 volumes:
   wordpress:
@@ -62,3 +69,11 @@ volumes:
 networks:
   inception:
     driver: bridge
+
+secrets:
+  db_password:
+    file: ../secrets/db_password.txt
+  db_root_password:
+    file: ../secrets/db_root_password.txt
+  credentials:
+    file: ../secrets/credentials.txt

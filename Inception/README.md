@@ -43,6 +43,15 @@ make up
 ### Access the website
 Navigate to: **https://agaroux.42.fr**
 
+
+### Access mariadb
+```bash
+docker exec -it mariadb mysql -u root -psuper_secret_root
+SHOW DATABASES;
+USE wordpress;
+SHOW TABLES;
+```
+
 ### Stop and clean up
 ```bash
 make down

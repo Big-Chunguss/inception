@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Read passwords from secrets
+export SQL_ROOT_PASSWORD=$(cat /run/secrets/db_root_password)
+export SQL_PASSWORD=$(cat /run/secrets/db_password)
+
 # Start MariaDB in the background
 mysqld_safe &
 
