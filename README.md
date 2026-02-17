@@ -1,3 +1,5 @@
+*This project has been created as part of the 42 curriculum by **agaroux***
+
 # 🐳 Inception
 
 <div align="center">
@@ -6,8 +8,6 @@
 ![NGINX](https://img.shields.io/badge/NGINX-009639?style=for-the-badge&logo=nginx&logoColor=white)
 ![WordPress](https://img.shields.io/badge/WordPress-21759B?style=for-the-badge&logo=wordpress&logoColor=white)
 ![MariaDB](https://img.shields.io/badge/MariaDB-003545?style=for-the-badge&logo=mariadb&logoColor=white)
-
-*A 42 School project by **agaroux***
 
 </div>
 
@@ -28,7 +28,7 @@ Each service runs in its own container, communicating through a custom Docker br
 
 ---
 
-## 🚀 Quick Start
+## 🚀 Instructions
 
 ### Build the containers
 ```bash
@@ -46,7 +46,8 @@ Navigate to: **https://agaroux.42.fr**
 
 ### Access mariadb
 ```bash
-docker exec -it mariadb mysql -u root -psuper_secret_root
+docker exec -it mariadb mysql -u root -p
+# Enter the password from secrets/db_root_password.txt when prompted
 SHOW DATABASES;
 USE wordpress;
 SHOW TABLES;
@@ -70,6 +71,8 @@ make clean
 
 ### 🎓 Tutorials
 - [Inception Tutorial (Grademe)](https://tuto.grademe.fr/inception/)
+
+AI was used to explain concepts and question my knowledge on specific subjects. I was also used to find last bugs, that I couldn't understand at that time and help make those .md files prettier.
 
 ---
 

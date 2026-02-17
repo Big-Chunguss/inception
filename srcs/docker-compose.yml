@@ -2,7 +2,6 @@ services:
   nginx:
     container_name: nginx 
     build: requirements/nginx/
-    # dockerfile: Dockerfile
     env_file:
       - .env
     ports:
@@ -17,32 +16,38 @@ services:
   mariadb:
     container_name: mariadb
     build: requirements/mariadb/
-    # dockerfile: Dockerfile
     restart: unless-stopped
     env_file:
       - .env
     environment:
-      - SQL_DATABASE=${SQL_DATABASE}
-      - SQL_USER=${SQL_USER}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_HOST=mariadb
     secrets:
       - db_password
       - db_root_password
+      - credentials
     volumes:
       - mariadb:/var/lib/mysql
     networks:
       - inception
-    secrets:
-      - db_password
-      - db_root_password
+
   wordpress:
     container_name: wordpress
     env_file: .env
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_HOST=mariadb
+      - WP_URL=${WP_URL}
+      - WP_TITLE=${WP_TITLE}
+      - WP_ADMIN_USER=${WP_ADMIN_USER}
+      - WP_ADMIN_EMAIL=${WP_ADMIN_EMAIL}
     volumes:
       - wordpress:/var/www/wordpress
     networks:
       - inception
     build: requirements/wordpress
-    # dockerfile: Dockerfile
     depends_on:
       - mariadb
     restart: on-failure
